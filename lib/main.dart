@@ -1,10 +1,11 @@
+// ignore_for_file: depend_on_referenced_packages, unused_import
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:tryingthistime/Language.dart';
 
 import 'package:tryingthistime/SpeechApi.dart';
-import 'package:tryingthistime/SpeechSampleApp.dart';
 
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
@@ -44,7 +45,6 @@ class _TranslateScreenState extends State<TranslateScreen> {
   bool _isListening = false;
   String _text = 'Press the button and start speaking';
   var _translatedText = "Tanslated Text will appear here";
-  double _confidence = 1.0;
   final translator = GoogleTranslator();
   String toLang = "en";
 
@@ -96,7 +96,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
                   );
                 }).toList(),
               ),
-              
+
               ElevatedButton(onPressed: () {}, child: const Text("Translate")),
             ],
           ),
@@ -126,7 +126,6 @@ class _TranslateScreenState extends State<TranslateScreen> {
                 var trans = toggelRecording();
                 setState(() {
                   _isListening = !_isListening;
-                  print(_translatedText);
                 });
               },
               child: Icon(_isListening ? Icons.mic : Icons.mic_none),
@@ -153,13 +152,11 @@ class _TranslateScreenState extends State<TranslateScreen> {
       // print(value);
       return value;
     });
-    print("in toggle recording after recieving from the method ${trans}");
     return trans;
   }
 
   Future<String> retrieveTranslation(String text) async {
     var translatedText = await translator.translate(text, from: 'en', to: 'es');
-    print("int the method ${translatedText.toString()}");
     return translatedText.toString();
   }
 }
